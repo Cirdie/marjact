@@ -29,8 +29,16 @@ Route::middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/courses', [UserCoursesController::class, 'index'])->name('courses');
     Route::get('/consultation', [UserConsultationController::class, 'index'])->name('consultation');
     Route::get('/request-document', [UserRequestDocumentController::class, 'index'])->name('request.document');
-Route::get('/profile/{name}', [UserProfileController::class, 'index'])->name('profile');
+    // Show profile (custom route)
+    Route::get('/profile/{name}', [UserProfileController::class, 'show'])->name('profile');
 
-
+    // Resource routes for edit and update
+Route::resource('profile', UserProfileController::class)
+        ->only(['show', 'edit', 'update'])
+        ->parameters(['profile' => 'name'])
+        ->names([
+            'show' => 'profile',
+            'edit' => 'profile.edit',
+            'update' => 'profile.update',
+        ]);
 });
-

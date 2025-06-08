@@ -6,23 +6,29 @@
 <div class="auth-card">
     <h3 class="text-center mb-4">Welcome Back</h3>
 
-    {{-- @Switch --}}
-
+    {{-- Feedback Alerts --}}
     @switch(true)
         @case(session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
             @break
 
         @case(session('status'))
-            <div class="alert alert-success">{{ session('status') }}</div>
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
             @break
 
         @default
-            <div class="alert alert-info">Please enter your credentials to log in.</div>
+            <div class="alert alert-info">
+                Please enter your credentials to log in.
+            </div>
     @endswitch
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
+
         <div class="mb-3">
             <label class="form-label">Email address</label>
             <input type="email" name="email" class="form-control" required autofocus>
